@@ -32,21 +32,20 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-namespace WinDivertSharp
+namespace WinDivertSharp;
+
+/// <summary>
+/// Represents a packet direction.
+/// </summary>
+public enum WinDivertDirection : byte
 {
     /// <summary>
-    /// Represents a packet direction.
+    /// Packet is outbound on the network.
     /// </summary>
-    public enum WinDivertDirection : byte
-    {
-        /// <summary>
-        /// Packet is outbound on the network.
-        /// </summary>
-        Outbound = 0,
+    Outbound = 0,
 
-        /// <summary>
-        /// Packet is inbound on the network.
-        /// </summary>
-        Inbound = 1,
-    }
+    /// <summary>
+    /// Packet is inbound on the network.
+    /// </summary>
+    Inbound = 1,
 }

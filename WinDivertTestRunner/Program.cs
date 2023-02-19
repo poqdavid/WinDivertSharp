@@ -39,85 +39,76 @@ using System.Linq;
 using System.Reflection;
 using WinDivertSharpTests;
 
-namespace WinDivertTestRunner
+// Thanks to the power of WinDiver to screw with testing software run through the IDE, we
+// also have this project where we can run our tests ourselves old school!
+
+var testClass = new WinDivertTests();
+
+testClass.Init();
+
+var methods = typeof(WinDivertTests).GetMethods();
+
+var testMethods = new List<MethodInfo>();
+
+foreach (var method in methods)
 {
-    internal class Program
+    var isTest = method.GetCustomAttribute<TestAttribute>() != null;
+    if (isTest)
     {
-        private static void Main(string[] args)
-        {
-            // Thanks to the power of WinDiver to screw with testing software run through the IDE, we
-            // also have this project where we can run our tests ourselves old school!
-
-            var testClass = new WinDivertTests();
-
-            testClass.Init();
-
-            var methods = typeof(WinDivertTests).GetMethods();
-
-            var testMethods = new List<MethodInfo>();
-
-            foreach (var method in methods)
-            {
-                var isTest = method.GetCustomAttribute<TestAttribute>() != null;
-                if (isTest)
-                {
-                    testMethods.Add(method);
-                }
-            }
-
-            testMethods = testMethods.OrderBy(x => x.Name).ToList();
-
-            int passed = 0;
-            int failed = 0;
-
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.BackgroundColor = ConsoleColor.Black;
-            Console.ResetColor();
-
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.BackgroundColor = ConsoleColor.Black;
-            foreach (var method in testMethods)
-            {
-                Console.ResetColor();
-
-                try
-                {
-                    method.Invoke(testClass, null);
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("Test {0} passed.", method.Name);
-                    ++passed;
-                }
-                catch (Exception err)
-                {
-                    while (err != null)
-                    {
-                        Console.WriteLine(err.Message);
-                        Console.WriteLine(err.StackTrace);
-                        err = err.InnerException;
-                    }
-
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Test {0} failed.", method.Name);
-                    ++failed;
-                }
-            }
-
-            testClass.DeInit();
-
-            if (passed > 0 && failed == 0)
-            {
-                Console.WriteLine(new string('*', Console.WindowWidth - 1));
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("All tests passed.");
-            }
-            else
-            {
-                Console.WriteLine(new string('*', Console.WindowWidth - 1));
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("{0} tests passed and {1} failed.", passed, failed);
-            }
-
-            Console.ResetColor();
-        }
+        testMethods.Add(method);
     }
 }
+
+testMethods = testMethods.OrderBy(x => x.Name).ToList();
+
+int passed = 0;
+int failed = 0;
+
+Console.ForegroundColor = ConsoleColor.White;
+Console.BackgroundColor = ConsoleColor.Black;
+Console.ResetColor();
+
+Console.ForegroundColor = ConsoleColor.White;
+Console.BackgroundColor = ConsoleColor.Black;
+foreach (var method in testMethods)
+{
+    Console.ResetColor();
+
+    try
+    {
+        method.Invoke(testClass, null);
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("Test {0} passed.", method.Name);
+        ++passed;
+    }
+    catch (Exception err)
+    {
+        while (err != null)
+        {
+            Console.WriteLine(err.Message);
+            Console.WriteLine(err.StackTrace);
+            err = err.InnerException;
+        }
+
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("Test {0} failed.", method.Name);
+        ++failed;
+    }
+}
+
+testClass.DeInit();
+
+if (passed > 0 && failed == 0)
+{
+    Console.WriteLine(new string('*', Console.WindowWidth - 1));
+    Console.ForegroundColor = ConsoleColor.Green;
+    Console.WriteLine("All tests passed.");
+}
+else
+{
+    Console.WriteLine(new string('*', Console.WindowWidth - 1));
+    Console.ForegroundColor = ConsoleColor.Red;
+    Console.WriteLine("{0} tests passed and {1} failed.", passed, failed);
+}
+
+Console.ResetColor();

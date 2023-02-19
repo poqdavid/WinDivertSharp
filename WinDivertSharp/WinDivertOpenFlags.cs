@@ -34,40 +34,39 @@
 
 using System;
 
-namespace WinDivertSharp
+namespace WinDivertSharp;
+
+/// <summary>
+/// Represents flags that specialize how a WinDivert handle is opened.
+/// </summary>
+[Flags]
+public enum WinDivertOpenFlags : ulong
 {
     /// <summary>
-    /// Represents flags that specialize how a WinDivert handle is opened.
+    /// No flags.
     /// </summary>
-    [Flags]
-    public enum WinDivertOpenFlags : ulong
-    {
-        /// <summary>
-        /// No flags.
-        /// </summary>
-        None = 0,
+    None = 0,
 
-        /// <summary>
-        /// Open in packet sniffing mode.
-        /// </summary>
-        Sniff = 1,
+    /// <summary>
+    /// Open in packet sniffing mode.
+    /// </summary>
+    Sniff = 1,
 
-        /// <summary>
-        /// Open in packet dropping mode.
-        /// </summary>
-        /// <remarks>
-        /// This mode causes captured packets to be dropped if not reinjected post-capture.
-        /// </remarks>
-        Drop = 2,
+    /// <summary>
+    /// Open in packet dropping mode.
+    /// </summary>
+    /// <remarks>
+    /// This mode causes captured packets to be dropped if not reinjected post-capture.
+    /// </remarks>
+    Drop = 2,
 
-        /// <summary>
-        /// Open in debug mode.
-        /// </summary>
-        /// <remarks>
-        /// Causes the
-        /// <seealso cref="WinDivert.WinDivertSend(IntPtr, WinDivertBuffer, uint, ref WinDivertAddress)" />
-        /// method to block until the packet has left the network stack.
-        /// </remarks>
-        Debug = 4
-    }
+    /// <summary>
+    /// Open in debug mode.
+    /// </summary>
+    /// <remarks>
+    /// Causes the
+    /// <seealso cref="WinDivert.WinDivertSend(IntPtr, WinDivertBuffer, uint, ref WinDivertAddress)" />
+    /// method to block until the packet has left the network stack.
+    /// </remarks>
+    Debug = 4
 }

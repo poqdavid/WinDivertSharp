@@ -32,145 +32,144 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-namespace WinDivertSharp
+namespace WinDivertSharp;
+
+/// <summary>
+/// Represents the result of an attempt packet parsing operation.
+/// </summary>
+public unsafe class WinDivertParseResult
 {
+    internal IPv4Header* _pip4Header = null;
+    internal IPv6Header* _pip6Header = null;
+    internal IcmpV4Header* _picmp4Header = null;
+    internal IcmpV6Header* _picmp6Header = null;
+    internal TcpHeader* _ptcpHdr = null;
+    internal UdpHeader* _pudpHdr = null;
+
+    internal byte* _pdataPtr;
+    internal uint _dataLen = 0;
+
     /// <summary>
-    /// Represents the result of an attempt packet parsing operation.
+    /// Gets the parsed IPv4 header.
     /// </summary>
-    public unsafe class WinDivertParseResult
+    /// <remarks>
+    /// Ensure that <seealso c="IsIPv4" /> is true before attempting access.
+    /// </remarks>
+    /// <exception c="NullerenceException">
+    /// If <see c="IsIPv4" /> is false, calling this property will throw.
+    /// </exception>
+    public IPv4Header* IPv4Header
     {
-        internal IPv4Header* _pip4Header = null;
-        internal IPv6Header* _pip6Header = null;
-        internal IcmpV4Header* _picmp4Header = null;
-        internal IcmpV6Header* _picmp6Header = null;
-        internal TcpHeader* _ptcpHdr = null;
-        internal UdpHeader* _pudpHdr = null;
-
-        internal byte* _pdataPtr;
-        internal uint _dataLen = 0;
-
-        /// <summary>
-        /// Gets the parsed IPv4 header.
-        /// </summary>
-        /// <remarks>
-        /// Ensure that <seealso c="IsIPv4" /> is true before attempting access.
-        /// </remarks>
-        /// <exception c="NullerenceException">
-        /// If <see c="IsIPv4" /> is false, calling this property will throw.
-        /// </exception>
-        public IPv4Header* IPv4Header
+        get
         {
-            get
-            {
-                return _pip4Header;
-            }
+            return _pip4Header;
         }
+    }
 
-        /// <summary>
-        /// Gets the parsed IPv6 header.
-        /// </summary>
-        /// <remarks>
-        /// Ensure that <seealso c="IsIPv6" /> is true before attempting access.
-        /// </remarks>
-        /// <exception c="NullerenceException">
-        /// If <see c="IsIPv6" /> is false, calling this property will throw.
-        /// </exception>
-        public IPv6Header* IPv6Header
+    /// <summary>
+    /// Gets the parsed IPv6 header.
+    /// </summary>
+    /// <remarks>
+    /// Ensure that <seealso c="IsIPv6" /> is true before attempting access.
+    /// </remarks>
+    /// <exception c="NullerenceException">
+    /// If <see c="IsIPv6" /> is false, calling this property will throw.
+    /// </exception>
+    public IPv6Header* IPv6Header
+    {
+        get
         {
-            get
-            {
-                return _pip6Header;
-            }
+            return _pip6Header;
         }
+    }
 
-        /// <summary>
-        /// Gets the parsed IcmpV4 header.
-        /// </summary>
-        /// <remarks>
-        /// Ensure that <seealso c="IsIcmpV4" /> is true before attempting access.
-        /// </remarks>
-        /// <exception c="NullerenceException">
-        /// If <see c="IsIcmpV4" /> is false, calling this property will throw.
-        /// </exception>
-        public IcmpV4Header* IcmpV4Header
+    /// <summary>
+    /// Gets the parsed IcmpV4 header.
+    /// </summary>
+    /// <remarks>
+    /// Ensure that <seealso c="IsIcmpV4" /> is true before attempting access.
+    /// </remarks>
+    /// <exception c="NullerenceException">
+    /// If <see c="IsIcmpV4" /> is false, calling this property will throw.
+    /// </exception>
+    public IcmpV4Header* IcmpV4Header
+    {
+        get
         {
-            get
-            {
-                return _picmp4Header;
-            }
+            return _picmp4Header;
         }
+    }
 
-        /// <summary>
-        /// Gets the parsed IcmpV6 header.
-        /// </summary>
-        /// <remarks>
-        /// Ensure that <seealso c="IsIcmpV6" /> is true before attempting access.
-        /// </remarks>
-        /// <exception c="NullerenceException">
-        /// If <see c="IsIcmpV6" /> is false, calling this property will throw.
-        /// </exception>
-        public IcmpV6Header* IcmpV6Header
+    /// <summary>
+    /// Gets the parsed IcmpV6 header.
+    /// </summary>
+    /// <remarks>
+    /// Ensure that <seealso c="IsIcmpV6" /> is true before attempting access.
+    /// </remarks>
+    /// <exception c="NullerenceException">
+    /// If <see c="IsIcmpV6" /> is false, calling this property will throw.
+    /// </exception>
+    public IcmpV6Header* IcmpV6Header
+    {
+        get
         {
-            get
-            {
-                return _picmp6Header;
-            }
+            return _picmp6Header;
         }
+    }
 
-        /// <summary>
-        /// Gets the parsed Tcp header.
-        /// </summary>
-        /// <remarks>
-        /// Ensure that <seealso c="IsTcp" /> is true before attempting access.
-        /// </remarks>
-        /// <exception c="NullerenceException">
-        /// If <see c="IsTcp" /> is false, calling this property will throw.
-        /// </exception>
-        public TcpHeader* TcpHeader
+    /// <summary>
+    /// Gets the parsed Tcp header.
+    /// </summary>
+    /// <remarks>
+    /// Ensure that <seealso c="IsTcp" /> is true before attempting access.
+    /// </remarks>
+    /// <exception c="NullerenceException">
+    /// If <see c="IsTcp" /> is false, calling this property will throw.
+    /// </exception>
+    public TcpHeader* TcpHeader
+    {
+        get
         {
-            get
-            {
-                return _ptcpHdr;
-            }
+            return _ptcpHdr;
         }
+    }
 
-        /// <summary>
-        /// Gets the parsed Udp header.
-        /// </summary>
-        /// <remarks>
-        /// Ensure that <seealso c="IsUdp" /> is true before attempting access.
-        /// </remarks>
-        /// <exception c="NullerenceException">
-        /// If <see c="IsUdp" /> is false, calling this property will throw.
-        /// </exception>
-        public UdpHeader* UdpHeader
+    /// <summary>
+    /// Gets the parsed Udp header.
+    /// </summary>
+    /// <remarks>
+    /// Ensure that <seealso c="IsUdp" /> is true before attempting access.
+    /// </remarks>
+    /// <exception c="NullerenceException">
+    /// If <see c="IsUdp" /> is false, calling this property will throw.
+    /// </exception>
+    public UdpHeader* UdpHeader
+    {
+        get
         {
-            get
-            {
-                return _pudpHdr;
-            }
+            return _pudpHdr;
         }
+    }
 
-        /// <summary>
-        /// Gets the parsed packet payload, if any.
-        /// </summary>
-        public byte* PacketPayload
+    /// <summary>
+    /// Gets the parsed packet payload, if any.
+    /// </summary>
+    public byte* PacketPayload
+    {
+        get
         {
-            get
-            {
-                return _pdataPtr;
-            }
+            return _pdataPtr;
         }
+    }
 
-        /// <summary>
-        /// Gets the packet payload length;
-        /// </summary>
-        public uint PacketPayloadLength
+    /// <summary>
+    /// Gets the packet payload length;
+    /// </summary>
+    public uint PacketPayloadLength
+    {
+        get
         {
-            get
-            {
-                return _dataLen;
-            }
+            return _dataLen;
         }
     }
 }

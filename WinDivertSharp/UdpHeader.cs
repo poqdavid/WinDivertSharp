@@ -34,32 +34,31 @@
 
 using System.Runtime.InteropServices;
 
-namespace WinDivertSharp
+namespace WinDivertSharp;
+
+/// <summary>
+/// Represents a UDP header.
+/// </summary>
+[StructLayout(LayoutKind.Sequential)]
+public struct UdpHeader
 {
     /// <summary>
-    /// Represents a UDP header.
+    /// Gets or sets the source port.
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
-    public struct UdpHeader
-    {
-        /// <summary>
-        /// Gets or sets the source port.
-        /// </summary>
-        public ushort SrcPort;
+    public ushort SrcPort;
 
-        /// <summary>
-        /// Gets or sets the destination port.
-        /// </summary>
-        public ushort DstPort;
+    /// <summary>
+    /// Gets or sets the destination port.
+    /// </summary>
+    public ushort DstPort;
 
-        /// <summary>
-        /// Gets or sets the length.
-        /// </summary>
-        public ushort Length;
+    /// <summary>
+    /// Gets or sets the length.
+    /// </summary>
+    public ushort Length;
 
-        /// <summary>
-        /// Gets or sets the checksum.
-        /// </summary>
-        public ushort Checksum;
-    }
+    /// <summary>
+    /// Gets or sets the checksum.
+    /// </summary>
+    public ushort Checksum;
 }

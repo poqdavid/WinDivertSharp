@@ -34,32 +34,31 @@
 
 using System.Runtime.InteropServices;
 
-namespace WinDivertSharp
+namespace WinDivertSharp;
+
+/// <summary>
+/// Represents an IPv4 Icmp header.
+/// </summary>
+[StructLayout(LayoutKind.Sequential)]
+public struct IcmpV4Header
 {
     /// <summary>
-    /// Represents an IPv4 Icmp header.
+    /// Gets or sets the ICMP type.
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
-    public struct IcmpV4Header
-    {
-        /// <summary>
-        /// Gets or sets the ICMP type.
-        /// </summary>
-        public byte Type;
+    public byte Type;
 
-        /// <summary>
-        /// Gets or sets the ICMP subtype.
-        /// </summary>
-        public byte Code;
+    /// <summary>
+    /// Gets or sets the ICMP subtype.
+    /// </summary>
+    public byte Code;
 
-        /// <summary>
-        /// Gets or sets the checksum.
-        /// </summary>
-        public ushort Checksum;
+    /// <summary>
+    /// Gets or sets the checksum.
+    /// </summary>
+    public ushort Checksum;
 
-        /// <summary>
-        /// Gets or sets the body.
-        /// </summary>
-        public uint Body;
-    }
+    /// <summary>
+    /// Gets or sets the body.
+    /// </summary>
+    public uint Body;
 }

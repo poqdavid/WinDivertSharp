@@ -32,21 +32,20 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-namespace WinDivertSharp
+namespace WinDivertSharp;
+
+/// <summary>
+/// Represents which part of the networking layer a WinDivert handle is operating on.
+/// </summary>
+public enum WinDivertLayer : uint
 {
     /// <summary>
-    /// Represents which part of the networking layer a WinDivert handle is operating on.
+    /// Represents the networking layer sans forwarded packets.
     /// </summary>
-    public enum WinDivertLayer : uint
-    {
-        /// <summary>
-        /// Represents the networking layer sans forwarded packets.
-        /// </summary>
-        Network = 0,
+    Network = 0,
 
-        /// <summary>
-        /// Represents forwarded packets exclusively on the network layer.
-        /// </summary>
-        Forward = 1,
-    }
+    /// <summary>
+    /// Represents forwarded packets exclusively on the network layer.
+    /// </summary>
+    Forward = 1,
 }
