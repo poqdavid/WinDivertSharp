@@ -19,6 +19,8 @@
     <Platforms>x64;x86</Platforms>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
 	<LangVersion>latest</LangVersion>
+	<Configurations>Debug;Release;ReleaseFD;ReleaseSC</Configurations>
+	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -26,7 +28,27 @@
     <OutputPath>bin\Release\x64\</OutputPath>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseSC|x64'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <OutputPath>bin\Release\x64\</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseFD|x64'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <OutputPath>bin\Release\x64\</OutputPath>
+  </PropertyGroup>
+
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <OutputPath>bin\Release\x86\</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseSC|x86'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <OutputPath>bin\Release\x86\</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseFD|x86'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <OutputPath>bin\Release\x86\</OutputPath>
   </PropertyGroup>
@@ -83,7 +105,7 @@
   </Target>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="..\..\..\stopWinDivert.bat&#xD;&#xA;xcopy /E /Y /C &quot;$(ProjectDir)\Lib\WinDivert\$(PlatformName)\*.dll&quot; &quot;$(TargetDir)\$(PlatformName)\&quot;&#xD;&#xA;xcopy /E /Y /C &quot;$(ProjectDir)\Lib\WinDivert\$(PlatformName)\*.sys&quot; &quot;$(TargetDir)\$(PlatformName)\&quot;" />
+    <Exec Command="..\stopWinDivert.bat&#xD;&#xA;xcopy /E /Y /C &quot;$(ProjectDir)\Libs\WinDivertSharp\Bins\WinDivert\$(PlatformName)\*.dll&quot; &quot;$(TargetDir)\$(PlatformName)\&quot;&#xD;&#xA;xcopy /E /Y /C &quot;$(ProjectDir)\Libs\WinDivertSharp\Bins\WinDivert\$(PlatformName)\*.sys&quot; &quot;$(TargetDir)\$(PlatformName)\&quot;" />
   </Target>
 
 </Project>
